@@ -67,21 +67,18 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 		    tks.put(token, fq);
 		    
 		  }
+		}
 		  Collection<Token> tklist = new ArrayList<Token> ();
 		  for (String st : tks.keySet()) {
 		    
 		    Token newtk = new Token(jcas);
-		    newtk.setFrequency(tks.get(token));
-		    newtk.setText(token);
+		    newtk.setFrequency(tks.get(st));
+		    newtk.setText(st);
 		    tklist.add(newtk);
 		    
 		  }
 		  
 		  doc.setTokenList(Utils.fromCollectionToFSList(jcas, tklist));
-		  
-		}
-		
-		
 		//TO DO: construct a vector of tokens and update the tokenList in CAS
     //TO DO: use tokenize0 from above 
 		
