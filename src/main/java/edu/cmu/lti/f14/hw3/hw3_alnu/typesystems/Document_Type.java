@@ -15,12 +15,12 @@ import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
  * Updated by JCasGen Fri Oct 11 01:58:03 EDT 2013
- * @generated */
+ */
 public class Document_Type extends Annotation_Type {
-  /** @generated */
+ 
   @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
-  /** @generated */
+  
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
@@ -36,25 +36,25 @@ public class Document_Type extends Annotation_Type {
         } else return new Document(addr, Document_Type.this);
   	  }
     };
-  /** @generated */
+  /**  */
   @SuppressWarnings ("hiding")
   public final static int typeIndexID = Document.typeIndexID;
-  /** @generated 
+  /**  
      @modifiable */
   @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
  
-  /** @generated */
+  /**  */
   final Feature casFeat_relevanceValue;
-  /** @generated */
+  /**  */
   final int     casFeatCode_relevanceValue;
-  /** @generated */ 
+  /**  */ 
   public int getRelevanceValue(int addr) {
         if (featOkTst && casFeat_relevanceValue == null)
       jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return ll_cas.ll_getIntValue(addr, casFeatCode_relevanceValue);
   }
-  /** @generated */    
+  /**  */    
   public void setRelevanceValue(int addr, int v) {
         if (featOkTst && casFeat_relevanceValue == null)
       jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
@@ -62,17 +62,17 @@ public class Document_Type extends Annotation_Type {
     
   
  
-  /** @generated */
+  /**  */
   final Feature casFeat_queryID;
-  /** @generated */
+  /**  */
   final int     casFeatCode_queryID;
-  /** @generated */ 
+  /**  */ 
   public int getQueryID(int addr) {
         if (featOkTst && casFeat_queryID == null)
       jcas.throwFeatMissing("queryID", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return ll_cas.ll_getIntValue(addr, casFeatCode_queryID);
   }
-  /** @generated */    
+  /**  */    
   public void setQueryID(int addr, int v) {
         if (featOkTst && casFeat_queryID == null)
       jcas.throwFeatMissing("queryID", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
@@ -80,17 +80,17 @@ public class Document_Type extends Annotation_Type {
     
   
  
-  /** @generated */
+  /**  */
   final Feature casFeat_text;
-  /** @generated */
+  /**  */
   final int     casFeatCode_text;
-  /** @generated */ 
+  /**  */ 
   public String getText(int addr) {
         if (featOkTst && casFeat_text == null)
       jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return ll_cas.ll_getStringValue(addr, casFeatCode_text);
   }
-  /** @generated */    
+  /**  */    
   public void setText(int addr, String v) {
         if (featOkTst && casFeat_text == null)
       jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
@@ -98,17 +98,17 @@ public class Document_Type extends Annotation_Type {
     
   
  
-  /** @generated */
+  /**  */
   final Feature casFeat_tokenList;
-  /** @generated */
+  /**  */
   final int     casFeatCode_tokenList;
-  /** @generated */ 
+  /**  */ 
   public int getTokenList(int addr) {
         if (featOkTst && casFeat_tokenList == null)
       jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return ll_cas.ll_getRefValue(addr, casFeatCode_tokenList);
   }
-  /** @generated */    
+  /**  */    
   public void setTokenList(int addr, int v) {
         if (featOkTst && casFeat_tokenList == null)
       jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
@@ -119,7 +119,7 @@ public class Document_Type extends Annotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	* @generated */
+	*  */
   public Document_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());

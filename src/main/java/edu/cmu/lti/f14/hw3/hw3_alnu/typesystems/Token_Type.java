@@ -15,12 +15,12 @@ import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
  * Updated by JCasGen Fri Oct 11 01:58:03 EDT 2013
- * @generated */
+ *  */
 public class Token_Type extends Annotation_Type {
-  /** @generated */
+  /**  */
   @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
-  /** @generated */
+  /**  */
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
@@ -36,25 +36,25 @@ public class Token_Type extends Annotation_Type {
         } else return new Token(addr, Token_Type.this);
   	  }
     };
-  /** @generated */
+  /**  */
   @SuppressWarnings ("hiding")
   public final static int typeIndexID = Token.typeIndexID;
-  /** @generated 
+  /**  
      @modifiable */
   @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");
  
-  /** @generated */
+  /**  */
   final Feature casFeat_text;
-  /** @generated */
+  /**  */
   final int     casFeatCode_text;
-  /** @generated */ 
+  /**  */ 
   public String getText(int addr) {
         if (featOkTst && casFeat_text == null)
       jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");
     return ll_cas.ll_getStringValue(addr, casFeatCode_text);
   }
-  /** @generated */    
+  /**  */    
   public void setText(int addr, String v) {
         if (featOkTst && casFeat_text == null)
       jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");
@@ -62,17 +62,17 @@ public class Token_Type extends Annotation_Type {
     
   
  
-  /** @generated */
+  /**  */
   final Feature casFeat_frequency;
-  /** @generated */
+  /**  */
   final int     casFeatCode_frequency;
-  /** @generated */ 
+  /**  */ 
   public int getFrequency(int addr) {
         if (featOkTst && casFeat_frequency == null)
       jcas.throwFeatMissing("frequency", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");
     return ll_cas.ll_getIntValue(addr, casFeatCode_frequency);
   }
-  /** @generated */    
+  /**  */    
   public void setFrequency(int addr, int v) {
         if (featOkTst && casFeat_frequency == null)
       jcas.throwFeatMissing("frequency", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");
@@ -83,7 +83,7 @@ public class Token_Type extends Annotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	* @generated */
+	*  */
   public Token_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
