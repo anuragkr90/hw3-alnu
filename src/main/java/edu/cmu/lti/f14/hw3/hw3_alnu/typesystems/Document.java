@@ -35,6 +35,7 @@ public class Document extends Annotation {
   protected Document() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
+   * @param addr type
    *  */
   public Document(int addr, TOP_Type type) {
     super(addr, type);
@@ -66,16 +67,18 @@ public class Document extends Annotation {
   //*--------------*
   //* Feature: relevanceValue
 
-  /** getter for relevanceValue - gets 
-   *  */
+  
   public int getRelevanceValue() {
     if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_relevanceValue == null)
       jcasType.jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return jcasType.ll_cas.ll_getIntValue(addr, ((Document_Type)jcasType).casFeatCode_relevanceValue);}
     
   /** setter for relevanceValue - sets  
-   *  */
-  public void setRelevanceValue(int v) {
+   * 
+   * @param rel
+   *
+   */
+public void setRelevanceValue(int v) {
     if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_relevanceValue == null)
       jcasType.jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     jcasType.ll_cas.ll_setIntValue(addr, ((Document_Type)jcasType).casFeatCode_relevanceValue, v);}    
@@ -92,6 +95,7 @@ public class Document extends Annotation {
     return jcasType.ll_cas.ll_getIntValue(addr, ((Document_Type)jcasType).casFeatCode_queryID);}
     
   /** setter for queryID - sets  
+   * @param qid
    *  */
   public void setQueryID(int v) {
     if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_queryID == null)
@@ -110,6 +114,7 @@ public class Document extends Annotation {
     return jcasType.ll_cas.ll_getStringValue(addr, ((Document_Type)jcasType).casFeatCode_text);}
     
   /** setter for text - sets  
+   * @param string
    *  */
   public void setText(String v) {
     if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_text == null)
@@ -128,6 +133,7 @@ public class Document extends Annotation {
     return (FSList)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Document_Type)jcasType).casFeatCode_tokenList)));}
     
   /** setter for tokenList - sets  
+   * @param tokenlist
    *  */
   public void setTokenList(FSList v) {
     if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_tokenList == null)
