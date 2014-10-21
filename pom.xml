@@ -110,4 +110,8 @@
 			</plugin>
 		</plugins>
 	</build>
+	<scm>
+		<connection>scm:git:git@github.com:anuragkr90/hw3-alnu.git</connection>
+		<developerConnection>scm:git:git@github.com:anuragkr90/hw3-alnu.git</developerConnection>
+	</scm>
 </project>

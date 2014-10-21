@@ -15,7 +15,7 @@ import edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token;
 import edu.cmu.lti.f14.hw3.hw3_alnu.utils.Utils;
 
 public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
-
+ 
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
 
@@ -38,8 +38,11 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 	List<String> tokenize0(String doc) {
 	  List<String> res = new ArrayList<String>();
 	  
-	  for (String s: doc.split("\\s+"))
+	  for (String s: doc.split("\\s+")){
+	    //String st=s.replace(".", "");
+	    //res.add(st.toLowerCase());
 	    res.add(s);
+	  }
 	  return res;
 	}
 
@@ -51,6 +54,13 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 
 	private void createTermFreqVector(JCas jcas, Document doc) {
 
+	  /*
+	   * Implemented term frequency computation 
+	   * Frequency of each term is computed and the term and its frequency are stored in Token type system is JCAS
+	   * The token List in Document type system are also updated. 
+	   */
+	  
+	  
 		String docText = doc.getText();
 		Map<String, Integer> tks = new HashMap<String, Integer>(); 
 		List<String> tokns = tokenize0(docText);

@@ -1,5 +1,6 @@
 package edu.cmu.lti.f14.hw3.hw3_alnu.casconsumers;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,6 +9,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.uima.UIMARuntimeException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
@@ -25,6 +27,14 @@ import edu.cmu.lti.f14.hw3.hw3_alnu.utils.Utils;
 
 public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
+  /*
+   * Storing Cosine Similarity, Document text, relevance value, qid and rank of each query in array lists
+   * Implemented cosine similarity function two compute cosine similarity between query and documents
+   * Implemented mrr computation function
+   * Implemented other similarity and distance function
+   */
+  
+  
 	/** query id number **/
 	public ArrayList<Integer> qIdList;
 
@@ -38,6 +48,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	public ArrayList<Double> cosSim;
 	
 	public ArrayList<Integer> ListRank;
+	public String flwrt ;
 	
 	public void initialize() throws ResourceInitializationException {
 
@@ -49,6 +60,8 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		fslList = new ArrayList<Map<String,Integer>>();
 		cosSim = new ArrayList<Double>();
 		ListRank = new ArrayList<Integer>();
+		
+		flwrt = (String)getConfigParameterValue("outputfilename");
 		
 		
 	}
@@ -82,6 +95,9 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 			docList.add(doc.getText());
 			
 			ArrayList<Token> querytk = Utils.fromFSListToCollection(doc.getTokenList(), Token.class);
+			/*
+			 * Storing query and frequency as hashmaps
+			 */
 			Map<String, Integer> querymap = MakeMap(querytk);
 			//Map<String, Double> queryl1 = l1norm(querymap);
 			fslList.add(querymap);
@@ -123,6 +139,8 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		        Map<String, Integer> dmap = fslList.get(nxt);
             double cosmeas = computeCosineSimilarity(qmap, dmap);
 		        //double cosmeas = computeEuclidean(qmap, dmap);
+            //double cosmeas = computeJacard(qmap, dmap);
+		        //double cosmeas = computeSimilarity(qmap, dmap);
             cosSim.add(cosmeas);
             nxt++; 
 		      }
@@ -169,6 +187,64 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		//System.out.println(cosSim.size());
 		double metric_mrr = compute_mrr();
 		System.out.println(" (MRR) Mean Reciprocal Rank ::" + metric_mrr);
+		//System.out.println(cosSim.size());
+		//System.out.println(fslList);
+		//System.out.println(ListRank.size());
+		//System.out.println(qIdList);
+		//System.out.println(docList);
+		//System.out.println(docList.size());
+		
+		ArrayList<Double> finalcos;
+		finalcos = new ArrayList<Double>();
+		
+		ArrayList<Integer> finalqid;
+    finalqid = new ArrayList<Integer>();
+    
+    ArrayList<Integer> finalrel;
+    finalrel = new ArrayList<Integer>();
+    
+    ArrayList<String> finalstr;
+    finalstr = new ArrayList<String>();
+    
+		for(int i=0;i<relList.size();i++){
+		  
+		  if(relList.get(i)==1){
+		   
+		    finalcos.add(cosSim.get(i));
+		    finalqid.add(qIdList.get(i));
+		    finalrel.add(relList.get(i));
+		    finalstr.add(docList.get(i));
+		  }
+		}
+		
+		//System.out.println("Start");
+		//for(int i=0;i<cosSim.size();i++){
+		  
+		//  System.out.println(String.format("%.4f",cosSim.get(i)) + " " + qIdList.get(i) + " "+ relList.get(i) + " " + docList.get(i));
+		//}
+		
+		
+		//System.out.println(finalcos);
+		//System.out.println(finalrel);
+		//System.out.println(finalqid);
+		//System.out.println(finalstr);
+		FileWriter wrtf = null;
+		try {
+		  wrtf = new FileWriter(flwrt, false);
+		  } catch (IOException e) {
+		  throw new UIMARuntimeException(e);
+		  }
+		
+		  for(int i=0;i < finalcos.size();i++){
+		   
+		    wrtf.write("cosine="+String.format("%.4f",finalcos.get(i))+ "\t"+"rank="+ListRank.get(i)+"\t"+"qid="+finalqid.get(i)+"\t"+"rel="+finalrel.get(i)+"\t"+finalstr.get(i)+"\n");
+		    
+		  }
+		  wrtf.write(String.format("MRR=%.4f\n", metric_mrr));
+		  wrtf.close();
+		  
+		
+		
 	}
 
 	/**
@@ -184,6 +260,10 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 			Map<String, Integer> docVector) {
 		double cosine_similarity=0.0;
 
+		/*
+		 * Cosine Similarity function
+		 */
+		
 		// TODO :: compute cosine similarity between two sentences
 		Map<String,Double> queryl1 = new HashMap<String,Double>();
 		Map<String,Double> docl1 = new HashMap<String,Double>();
@@ -209,17 +289,103 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		  }
 		  
 		}
-		cosine_similarity = Math.round((cosine_similarity * 10000))/10000.0;
+		//cosine_similarity = Math.round((cosine_similarity * 10000))/10000.0;
 		return cosine_similarity;
 	}
 
 	
+	 private double computeJacard(Map<String, Integer> queryVector,
+	         Map<String, Integer> docVector) {
+	       double cosine_similarity=0.0;
+
+	       /*
+	        *Jacard Similarity
+	        */
+	       
+	       // TODO :: compute cosine similarity between two sentences
+	       Map<String,Double> queryl1 = new HashMap<String,Double>();
+	       Map<String,Double> docl1 = new HashMap<String,Double>();
+	       
+	       Map<String,Double> docl2 = new HashMap<String,Double>();
+	       Map<String,Double> queryl2 = new HashMap<String,Double>();
+	       
+	       queryl1 = l1norm(queryVector);
+	       docl1 = l1norm(docVector);
+	       
+	       docl2 = docl1;
+	       queryl2 = queryl1;
+	       
+	       //queryl2 = l2norm(queryl1);
+	       //docl2 = l2norm(docl1);
+	       
+	       //queryl2 = l2normint(queryVector);
+	       //docl2 = l2normint(docVector);
+	       double nume = 0.0;
+	       double denom = 0.0;
+	       for(String st:queryl2.keySet()){
+	         
+	         double currq = queryl2.get(st);
+	         if(docl2.containsKey(st)){
+	           nume = nume + Math.min(currq, docl2.get(st));
+	           denom = denom + Math.max(currq, docl2.get(st));
+	         }
+	         
+	       }
+	       if(denom!=0.0){
+	         cosine_similarity = nume/denom;
+	       }
+	       
+	       return cosine_similarity;
+	     }
 	
+	 private double computeSimilarity(Map<String, Integer> queryVector,
+           Map<String, Integer> docVector) {
+         double cosine_similarity=0.0;
+
+         /*
+          * Histogram Similarity-- similar to jacard 
+          * 
+          */
+         
+         // TODO :: compute cosine similarity between two sentences
+         Map<String,Double> queryl1 = new HashMap<String,Double>();
+         Map<String,Double> docl1 = new HashMap<String,Double>();
+         
+         Map<String,Double> docl2 = new HashMap<String,Double>();
+         Map<String,Double> queryl2 = new HashMap<String,Double>();
+         
+         queryl1 = l1norm(queryVector);
+         docl1 = l1norm(docVector);
+         
+         docl2 = docl1;
+         queryl2 = queryl1;
+         
+         //queryl2 = l2norm(queryl1);
+         //docl2 = l2norm(docl1);
+         
+         //queryl2 = l2normint(queryVector);
+         //docl2 = l2normint(docVector);
+         
+         for(String st:queryl2.keySet()){
+           
+           double currq = queryl2.get(st);
+           if(docl2.containsKey(st)){
+             cosine_similarity = cosine_similarity + Math.min(currq, docl2.get(st));
+           }
+           
+         } 
+         return cosine_similarity;
+       }
 	
 	private double computeEuclidean(Map<String, Integer> queryVector,
 	        Map<String, Integer> docVector) {
 	      double cosine_similarity=0.0;
 
+	      /*
+	       * Euclidean distance -- since this is a distance shorting has to be done in ascending order
+	       * 
+	       */
+	      
 	      // TODO :: compute cosine similarity between two sentences
 	      Map<String,Double> queryl1 = new HashMap<String,Double>();
 	      Map<String,Double> docl1 = new HashMap<String,Double>();
@@ -246,13 +412,15 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	        }
 	        
 	      }
-	      cosine_similarity = Math.round((cosine_similarity * 10000))/10000.0;
+	      //cosine_similarity = Math.round((cosine_similarity * 10000))/10000.0;
 	      return cosine_similarity;
 	    }
 
 
 	private Map<String,Double> l1norm(Map<String, Integer> queryVector){
-	  
+	  /*
+	   * function for L1 normalizing of vector
+	   */
 	  Double fsum =0.0;
 	  Map<String,Double> finalret = new HashMap<String,Double>();
 	  
@@ -270,7 +438,9 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	 return finalret; 
 	}
 	 private Map<String,Double> l2norm(Map<String, Double> queryVector){
-	    
+	   /*
+	    * function for L1 normalizing of vector
+	    */
 	    Double fsum =0.0;
 	    Map<String,Double> finalret = new HashMap<String,Double>();
 	    
@@ -313,6 +483,10 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	private double compute_mrr() {
 		double metric_mrr=0.0;
 
+		/*
+		 * MRR computation function
+		 */
+		
 		// TODO :: compute Mean Reciprocal Rank (MRR) of the text collection
 		int ln = ListRank.size() ;
 		double invrank = 0.0;
@@ -321,7 +495,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
     }
     metric_mrr = (1.0/ln)*invrank;
     // TODO :: compute Mean Reciprocal Rank (MRR) of the text collection
-    metric_mrr = Math.round(metric_mrr*10000)/10000.0;
+    //metric_mrr = Math.round(metric_mrr*10000)/10000.0;
     return metric_mrr;
 		
 	}
