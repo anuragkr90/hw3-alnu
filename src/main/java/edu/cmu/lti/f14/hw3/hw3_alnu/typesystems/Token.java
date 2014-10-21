@@ -65,15 +65,13 @@ public class Token extends Annotation {
   //*--------------*
   //* Feature: text
 
-  /** getter for text - gets 
-   *  */
+ 
   public String getText() {
     if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_text == null)
       jcasType.jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");
     return jcasType.ll_cas.ll_getStringValue(addr, ((Token_Type)jcasType).casFeatCode_text);}
     
-  /** setter for text - sets  
-   *  */
+ 
   public void setText(String v) {
     if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_text == null)
       jcasType.jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");
@@ -83,15 +81,13 @@ public class Token extends Annotation {
   //*--------------*
   //* Feature: frequency
 
-  /** getter for frequency - gets 
-   *  */
+  
   public int getFrequency() {
     if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_frequency == null)
       jcasType.jcas.throwFeatMissing("frequency", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");
     return jcasType.ll_cas.ll_getIntValue(addr, ((Token_Type)jcasType).casFeatCode_frequency);}
     
-  /** setter for frequency - sets  
-   *  */
+
   public void setFrequency(int v) {
     if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_frequency == null)
       jcasType.jcas.throwFeatMissing("frequency", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Token");

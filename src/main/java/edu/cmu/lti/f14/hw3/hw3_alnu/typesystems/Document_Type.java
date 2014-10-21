@@ -39,8 +39,7 @@ public class Document_Type extends Annotation_Type {
   /**  */
   @SuppressWarnings ("hiding")
   public final static int typeIndexID = Document.typeIndexID;
-  /**  
-     @modifiable */
+
   @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
  
@@ -48,13 +47,13 @@ public class Document_Type extends Annotation_Type {
   final Feature casFeat_relevanceValue;
   /**  */
   final int     casFeatCode_relevanceValue;
-  /**  */ 
+  
   public int getRelevanceValue(int addr) {
         if (featOkTst && casFeat_relevanceValue == null)
       jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return ll_cas.ll_getIntValue(addr, casFeatCode_relevanceValue);
   }
-  /**  */    
+ 
   public void setRelevanceValue(int addr, int v) {
         if (featOkTst && casFeat_relevanceValue == null)
       jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
@@ -66,13 +65,13 @@ public class Document_Type extends Annotation_Type {
   final Feature casFeat_queryID;
   /**  */
   final int     casFeatCode_queryID;
-  /**  */ 
+
   public int getQueryID(int addr) {
         if (featOkTst && casFeat_queryID == null)
       jcas.throwFeatMissing("queryID", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return ll_cas.ll_getIntValue(addr, casFeatCode_queryID);
   }
-  /**  */    
+  
   public void setQueryID(int addr, int v) {
         if (featOkTst && casFeat_queryID == null)
       jcas.throwFeatMissing("queryID", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
@@ -84,13 +83,13 @@ public class Document_Type extends Annotation_Type {
   final Feature casFeat_text;
   /**  */
   final int     casFeatCode_text;
-  /**  */ 
+
   public String getText(int addr) {
         if (featOkTst && casFeat_text == null)
       jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return ll_cas.ll_getStringValue(addr, casFeatCode_text);
   }
-  /**  */    
+    
   public void setText(int addr, String v) {
         if (featOkTst && casFeat_text == null)
       jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
@@ -102,13 +101,13 @@ public class Document_Type extends Annotation_Type {
   final Feature casFeat_tokenList;
   /**  */
   final int     casFeatCode_tokenList;
-  /**  */ 
+ 
   public int getTokenList(int addr) {
         if (featOkTst && casFeat_tokenList == null)
       jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
     return ll_cas.ll_getRefValue(addr, casFeatCode_tokenList);
   }
-  /**  */    
+    
   public void setTokenList(int addr, int v) {
         if (featOkTst && casFeat_tokenList == null)
       jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f14.hw3.hw3_alnu.typesystems.Document");
